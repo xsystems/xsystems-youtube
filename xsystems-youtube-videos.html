@@ -93,14 +93,37 @@ Elements to present video data obtained from the YouTube Data API.
         is: 'xsystems-youtube-videos',
 
         properties: {
+          /**
+           * Use a layout that accommodates narrow devices.
+           */
           narrow: Boolean,
+
+          /**
+           * YouTube Data API key.
+           */
           key: String,
+
+          /**
+           * Query term to search for.
+           */
           query: String,
+
+          /**
+           * Channel id, which indicates that the result set should only contain resources created by the channel.
+           */
           channel: String,
+
+          /**
+           * Length of time in milliseconds to debounce multiple automatically generated requests.
+           */
           debounceDuration: {
             type: Number,
             value: 500
           },
+
+          /**
+           * Selected result of the results that match the search criteria.
+           */
           selected: {
             type: Object,
             notify: true

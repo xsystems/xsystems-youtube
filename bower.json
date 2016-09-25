@@ -36,6 +36,7 @@
     "paper-styles": "PolymerElements/paper-styles#^1.1.5",
     "prism-element": "PolymerElements/prism-highlighter#^1.1.1",
     "iron-overlay-behavior": "PolymerElements/iron-overlay-behavior#^1.8.6",
-    "google-youtube": "GoogleWebComponents/google-youtube#^1.2.1"
+    "google-youtube": "GoogleWebComponents/google-youtube#^1.2.1",
+    "iron-icons": "PolymerElements/iron-icons#^1.1.3"
   }
 }
