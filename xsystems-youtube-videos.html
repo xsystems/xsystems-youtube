@@ -68,7 +68,8 @@ Element to present video data obtained from the YouTube Data API.
     </xsystems-youtube-search>
 
     <iron-scroll-threshold  id="scrollThreshold"
-                            on-lower-threshold="_loadMoreVideos">
+                            on-lower-threshold="_loadMoreVideos"
+                            scroll-target="[[scrollTarget]]">
       <template is="dom-repeat" items="[[_videos]]" as="video">
         <paper-card class="video">
           <iron-image class="video-thumbnail"
@@ -129,7 +130,12 @@ Element to present video data obtained from the YouTube Data API.
           selected: {
             type: Object,
             notify: true
-          }
+          },
+
+          /**
+           * Specifies the element that will handle the scroll event on the behalf of the current element.
+           */
+          scrollTarget: HTMLElement
         },
 
         observers: [
