@@ -51,6 +51,10 @@ Element to present video data obtained from the YouTube Data API.
         cursor: pointer;
       }
 
+      .filler {
+        min-height: 50%;
+      }
+
       xsystems-youtube-search, array-selector {
         display: none;
       }
@@ -60,7 +64,7 @@ Element to present video data obtained from the YouTube Data API.
                               query="[[query]]"
                               channel="[[channel]]"
                               type="video"
-                              results-per-page="9"
+                              results-per-page="[[resultsPerPage]]"
                               debounce-duration="[[debounceDuration]]"
                               page-token="{{_pageToken}}"
                               items="{{_items}}"
@@ -83,7 +87,9 @@ Element to present video data obtained from the YouTube Data API.
         </paper-card>
       </template>
 
-      <div id="filler"></div>
+      <template is="dom-repeat" items="[[_fillers]]" as="filler">
+        <div class="video filler"></div>
+      </template>
     </iron-scroll-threshold>
 
     <array-selector id="videoSelector" items="{{_videos}}" selected="{{selected}}"></array-selector>
@@ -135,7 +141,12 @@ Element to present video data obtained from the YouTube Data API.
           /**
            * Specifies the element that will handle the scroll event on the behalf of the current element.
            */
-          scrollTarget: HTMLElement
+          scrollTarget: HTMLElement,
+
+          resultsPerPage: {
+            type: Number,
+            value: 9
+          },
         },
 
         observers: [
@@ -159,12 +170,10 @@ Element to present video data obtained from the YouTube Data API.
             this._videos = items;
           }
 
-          var numberOfItemsToFillRow = 3 - (this._videos.length % 3);
-          if (numberOfItemsToFillRow < 3) {
-            this.$.filler.style.width = numberOfItemsToFillRow * 32.66 + '%';
-            this.$.filler.style.display = '';
-          } else {
-            this.$.filler.style.display = 'none';
+          this._fillers = [];
+          var numberOfFillers = this._videos.length < this.resultsPerPage ? this.resultsPerPage - this._videos.length : 3 - (this._videos.length % 3)
+          for (var i = 0; i < numberOfFillers; i++) {
+            this.push('_fillers', {});
           }
 
           this.$.scrollThreshold.clearTriggers();
