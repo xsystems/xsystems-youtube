@@ -17,7 +17,7 @@ Element to present video data obtained from the YouTube Data API.
     <style>
       :host {
         @apply(--layout-vertical);
-        @apply(--layout-flex);
+        display: block;
         padding-bottom: 1%;
       }
 
@@ -26,7 +26,6 @@ Element to present video data obtained from the YouTube Data API.
         @apply(--layout-justified);
         @apply(--layout-wrap);
         @apply(--layout-flex);
-        padding: 1%;
       }
 
       .video {
@@ -171,7 +170,7 @@ Element to present video data obtained from the YouTube Data API.
           }
 
           this._fillers = [];
-          var numberOfFillers = this._videos.length < this.resultsPerPage ? this.resultsPerPage - this._videos.length : 3 - (this._videos.length % 3)
+          var numberOfFillers = 3 - (this._videos.length % 3)
           for (var i = 0; i < numberOfFillers; i++) {
             this.push('_fillers', {});
           }
